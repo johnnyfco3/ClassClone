@@ -45,7 +45,7 @@ function update(id, newUser){
     const index = list.findIndex(user => user.id === parseInt(id))
     const oldUser = list[index]
     
-    newUser = { ...oldUser, ...newUser }
+    newUser = list[index] = { ...oldUser, ...newUser }
 
     return { ...newUser, password: undefined }
 }
