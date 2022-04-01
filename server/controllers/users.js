@@ -22,9 +22,11 @@ app
         const user = userModel.remove(req.params.id)
         res.send({ success: true, errors: [], date: user })
     })
-    .patch('/:id', (req,res)=>{
-        const user = userModel.update(req.params.id, req.body)
-        res.send({ success: true, errors: [], date: user })
+    .patch('/:id', (req,res, next)=>{
+        userModel.update(req.params.id, req.body)
+        .then(user => {
+            res.send({ success: true, errors: [], date: user })
+        }).catch(next)
     })
 
 module.exports = app
