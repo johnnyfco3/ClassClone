@@ -18,7 +18,7 @@ Content-Type: application/json
     "lastName": "Christian",
     "handle": "newpaltz_benevolent",
     "password": "hugo",
-    "email": "jhon@doe.com",
+    "email": "president@newpaltz.edu",
     "pic": "https://randomuser.me/api/portraits/men/2.jpg"
 }
 
@@ -27,5 +27,59 @@ PATCH http://localhost:3001/api/users/2
 Content-Type: application/json
 
 {
-    "lastName": "Putin III"
+    "lastName": "Putin III",
+    "password": "Ukraine",
+    "email": "save@ukraine.com"
+}
+
+###
+POST http://localhost:3001/api/users/login
+Content-Type: application/json
+
+{
+    "email": "save@ukraine.com",
+    "password": "Ukraine"
+}
+
+###
+GET http://localhost:3001/api/posts/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+
+###
+GET http://localhost:3001/api/posts/wall
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+
+
+###
+GET http://localhost:3001/api/posts/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+
+###
+DELETE  http://localhost:3001/api/posts/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+
+
+###
+POST http://localhost:3001/api/posts
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+
+
+    {
+        "src": "https://w2.chabad.org/media/images/1187/SvDB11878116.jpg?_i=_n504BC99DD0473598AAE3BCDC5D75568D",
+        "caption": "Of Mugs and Family Ties",
+        "owner": 1,
+        "likes": [],
+        "comments": [],
+        "isPublic": true,
+     }
+
+
+###
+PATCH http://localhost:3001/api/posts/2
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+
+{
+    "owner": 3,
 }

@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 let highestId = 3
 
 const list = [
@@ -55,6 +57,34 @@ async function update(id, newUser){
     return { ...newUser, password: undefined }
 }
 
+async function login(email, password){
+    const user = list.find(user => user.email === email)
+    if(!user){
+        throw { statusCode: 404, message: 'User not Found' }
+    }
+    if(!await bcrypt.compare(password, user.password)){
+        throw { statusCode: 401, message: 'Invalid Password' }
+    }
+
+    const data = { ...user, password: undefined }
+    const token = jwt.sign(data, process.env.JWT_SECRET)
+
+    return { ...data, token }
+}
+
+function fromToken(token){
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+            if(err){
+                reject(err)
+            }
+            else {
+                resolve(decoded)
+            }
+        })
+    })
+}
+
 module.exports = {
     async create(user) {
         user.id = ++highestId
@@ -62,13 +92,13 @@ module.exports = {
         user.password = await bcrypt.hash(user.password, +process.env.SALT_ROUNDS)
         console.log(user)
 
-        throw { message: 'This is a test error' }
-
         list.push(user)
         return { ...user, password: undefined }
     },
     remove,
     update,
+    login,
+    fromToken,
     get list(){
         return list.map(x => ({ ...x, password: undefined }))
     }
