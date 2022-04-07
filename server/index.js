@@ -11,7 +11,7 @@ const app = express()
 const port = process.env.PORT || 3000
 
 app
-  .use('/', express.static(__dirname + '/public'))
+  .use('/', express.static(__dirname + '/public/'))
 
   .use(express.json())
   .use((req, res, next) => {
