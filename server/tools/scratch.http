@@ -5,10 +5,13 @@ GET http://localhost:3001/api/users/
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
 
 ###
-GET http://localhost:3001/api/users/624f35ab5236479e874473bf
+GET http://localhost:3001/api/users/62547245d32925b581ec0e1f
 
 ###
-DELETE  http://localhost:3001/api/users/624f35ab5236479e874473bf
+GET http://localhost:3001/api/users/handle/vp
+
+###
+DELETE  http://localhost:3001/api/users/62547245d32925b581ec0e1f
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
 
 ###
