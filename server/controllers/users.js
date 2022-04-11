@@ -19,6 +19,12 @@ app
             res.send(user)
         }).catch(next)
     })
+    .get('/handle/:handle', (req,res,next)=>{
+        userModel.getByHandle(req.params.handle)
+        .then(user => {
+            res.send(user)
+        }).catch(next)
+    })
     .post('/', (req,res, next)=>{
         userModel.create(req.body)
         .then(user => {
