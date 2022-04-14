@@ -61,6 +61,15 @@ async function update(id, newPost){
     return includeUser(post.value);
 }
 
+async function getWall(handle){
+    const posts = await collection.find({ owner: handle }).toArray();
+    return Promise.all(posts.map(x => includeUser(x)));
+}
+
+function seed(){
+    return collection.insertMany(list);
+}
+
 module.exports = {
     async create(post) {
         post.id = ++highestId
@@ -72,6 +81,8 @@ module.exports = {
     },
     remove,
     update,
+    getWall,
+    seed,
     async getList(){
         const posts = await collection.find({}).toArray()
 

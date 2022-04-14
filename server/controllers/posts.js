@@ -35,5 +35,10 @@ app
         .then(post => res.send({ success: true, errors: [], data: post }))
         .catch(next)
     })
+    .post('/seed', (req, res, next) => {
+        postModel.seed()
+            .then(post => res.status(CREATED_STATUS).json({ success: true, errors: [], data: post }))
+            .catch(next);
+    })
 
 module.exports = app
