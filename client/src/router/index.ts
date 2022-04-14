@@ -25,9 +25,7 @@ router.beforeEach((to, from) => {
   if(session.destinationURL == null && to.path !== '/login'){
     session.destinationURL = to.path
   }
-  console.log({ to })
   const protectedURLs = ['/wall', '/feed', 'hidden']
-  console.log(protectedURLs)
   if(protectedURLs.includes(to.path)){
     console.log('requires login')
     if(!session.user){
