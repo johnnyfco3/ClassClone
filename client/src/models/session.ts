@@ -14,7 +14,7 @@ export const useSession = defineStore('session', {
             const messages = useMessage();
         
             try {
-                const user = await api("users/login", {email, password} )
+                const user = await this.api("users/login", {email, password} )
         
                 if(user){
                     messages.notifications.push({
@@ -36,6 +36,27 @@ export const useSession = defineStore('session', {
         Logout(){
             this.user = null
             router.push('/login')
+        },
+        async api(url: string, data?: any, method?: 'POST' | 'GET' | 'PUT' | 'DELETE', headers?: any){
+            const messages = useMessage();
+            try{
+                const response = await api(url, data, method, headers)
+                if(response.errors?.length){
+                    throw { message: response.errors.join(', ') }
+                }
+                return await response.data
+            }catch(error: any){
+                messages.notifications.push({
+                    type: "danger",
+                    message: error.message
+                })
+            }
         }
     },
 })
+
+export interface ApiResult {
+    data: any
+    errors?: string[]
+    success?: boolean
+}
