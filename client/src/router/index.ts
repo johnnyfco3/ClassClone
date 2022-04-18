@@ -3,7 +3,7 @@ import Home from '../pages/Home.vue';
 // import Messages from '../pages/Messages.vue';
 import Generic from '../pages/Generic.vue'
 import Login from '../pages/Login.vue'
-import session from "../models/session";
+import { useSession } from "../models/session";
 
 const routes: RouteRecordRaw[] = [
   { path: '/', component: Home },
@@ -22,6 +22,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
+  const session = useSession();
+  
   if(session.destinationURL == null && to.path !== '/login'){
     session.destinationURL = to.path
   }
