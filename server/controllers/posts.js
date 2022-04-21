@@ -10,6 +10,11 @@ app
         .then(posts => res.json({ success: true, errors: [], data: posts }))
         .catch(next)
     })
+    .get('/wall/', (req,res,next) =>{
+        postModel.getWall(req.user.handle)
+        .then(posts => res.json({ success: true, errors: [], data: posts }))
+        .catch(next)
+    })
     .get('/wall/:handle', (req,res,next) =>{
         postModel.getWall(req.params.handle)
         .then(posts => res.json({ success: true, errors: [], data: posts }))
@@ -21,6 +26,7 @@ app
         .catch(next)
     })
     .post('/', (req,res,next)=>{
+        req.body.owner = req.user.handle
         postModel.create(req.body)
         .then(post => res.status(CREATED_STATUS).json({ success: true, errors: [], data: post }))
         .catch(next)

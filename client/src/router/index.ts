@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/contact', component: Generic, props: { title: 'Contact Page'} },
   { path: '/login', component: Login },
   { path: '/signup', component: Generic, props: { title: 'Signup Page'} },
-  { path: '/wall', component: ()=> import('../pages/Wall.vue') },
+  { path: '/wall/:handle?', component: ()=> import('../pages/Wall.vue') },
   { path: '/hidden', component: Generic, props: { title: 'You reached the Hidden Page'} }
 ];
 
@@ -27,8 +27,8 @@ router.beforeEach((to, from) => {
   if(session.destinationURL == null && to.path !== '/login'){
     session.destinationURL = to.path
   }
-  const protectedURLs = ['/wall', '/feed', 'hidden']
-  if(protectedURLs.includes(to.path)){
+  const protectedURLs = ['/wall', '/feed', 'hidden', '/messages']
+  if(protectedURLs.includes(to.path.toLowerCase())){
     console.log('requires login')
     if(!session.user){
       return '/login';

@@ -1,13 +1,15 @@
 const API_URL = 'http://localhost:3001/api/';
 
 export function api(url: string, body?: any, method?: string, headers?: HeadersInit) {
-  let options: RequestInit = {}
+  let options: RequestInit = { headers };
+
   if (body) {
     options = {
       method: method ?? 'POST', 
       cache: 'no-cache', 
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...headers
       },
       body: JSON.stringify(body) 
     };
