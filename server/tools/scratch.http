@@ -26,6 +26,19 @@ Content-Type: application/json
     "email": "president@newpaltz.edu",
     "pic": "https://randomuser.me/api/portraits/men/2.jpg"
 }
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "firstName": "Kamala",
+    "lastName": "Harris",
+    "handle": "vp",
+    "password": "password",
+    "email": "kamila@whitehouse.org",
+    "pic": "https://randomuser.me/api/portraits/women/3.jpg"
+}
+
 
 ###
 PATCH http://localhost:3001/api/users/2

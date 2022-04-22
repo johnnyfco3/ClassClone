@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Post } from "../models/posts";
+import { Post } from '../models/posts';
 
 const { post } = defineProps<{post: Post}>();
 
@@ -29,6 +29,6 @@ const { post } = defineProps<{post: Post}>();
     </div>
 </template>
 
-<style scoped>
 
+<style scoped>
 </style>
