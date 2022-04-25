@@ -15,6 +15,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/signup', component: Generic, props: { title: 'Signup Page!' } },
   { path: '/wall/:handle?', component: () => import('../pages/Wall.vue') },
   { path: '/hidden', component: Generic, props: { title: 'You reached the hidden Page!' } },
+  { path: '/weather', component: () => import('../pages/Weather.vue') },
 ]
 
 
