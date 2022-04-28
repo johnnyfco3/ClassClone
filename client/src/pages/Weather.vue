@@ -2,10 +2,11 @@
 import { reactive } from 'vue';
 
 const weather = reactive({ data: {} as any });
-const result = fetch('https://api.coinbase.com/v2/exchange-rates')
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${import.meta.env.VITE_OPENWEATHER_KEY}`)
                     .then(res => res.json())
                     .then(data => {
-                        weather.data = Object.entries(data.data.rates);
+                        console.log(data)
+                        weather.data = Object.entries(data.main);
                     });
 
 console.log(weather);
@@ -15,8 +16,8 @@ console.log(weather);
         <table class="table">
             <thead>
                 <tr>
-                    <th>Currency</th>
-                    <th>Rate</th>
+                    <th>Attribute</th>
+                    <th>Value</th>
                 </tr>
             </thead>
             <tbody>
