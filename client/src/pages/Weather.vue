@@ -1,15 +1,30 @@
+<script lang="ts">
+  declare var mapIsReady: Promise<void>;
+</script>
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 
-const weather = reactive({ data: {} as any });
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${import.meta.env.VITE_OPENWEATHER_KEY}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        weather.data = Object.entries(data.main);
-                    });
+const weather = reactive({ data: {} as any});
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${import.meta.env.VITE_OPENWEATHER_KEY}`)
+        .then(x=>x.json())
+        .then(x=>{
+                console.log(x);
+                weather.data = Object.entries(x.main);
+        });
 
-console.log(weather);
+const location = ref<any>({})
+    mapIsReady.then(() => {  
+        
+    var request = {
+        query: 'Museum of Contemporary Art',
+        fields: ['name', 'geometry'],
+    };
+    var service = new google.maps.places.PlacesService(document.createElement('div'));
+    service.findPlaceFromQuery(request, function(results, status) {
+        console.log(results);
+        location.value = results![0];
+    });
+});
 </script>
 <template>
     <div>
@@ -27,6 +42,10 @@ console.log(weather);
                 </tr>
             </tbody>
         </table>
+
+        {{ location.name }}
+        {{ location.geometry.location.lat() }}
+        {{ location.geometry.location.lng() }}
 
     </div>
 </template>
