@@ -1,5 +1,9 @@
 export function loadScript(url: string, id: string): Promise<void> {
     return new Promise((resolve, reject) => {
+      if(document.getElementById(id)) {
+        resolve(); return 
+      }
+      
       const script = document.createElement('script');
       script.src = url;
       script.id = id;

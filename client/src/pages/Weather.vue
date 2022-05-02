@@ -12,6 +12,7 @@ const weather = reactive({ data: {} as any});
                 weather.data = Object.entries(x.main);
         });
 
+
 const location = ref<any>({})
     mapIsReady.then(() => {  
         

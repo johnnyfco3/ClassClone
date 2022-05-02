@@ -3,6 +3,7 @@ import * as users from "../models/user"
 import { useMessage } from "./messages"
 import { api } from "./myFetch"
 import { defineStore } from "pinia"
+import { decodeJWT, loadScript } from "./utils"
 
 export const useSession = defineStore('session', {
     state: () => ({
@@ -10,6 +11,26 @@ export const useSession = defineStore('session', {
         destinationURL: null as string | null
     }),
     actions: {
+        async GoogleLogin(){
+            await loadScript('https://accounts.google.com/gsi/client', 'google-signin')
+            google.accounts.id.initialize({
+                client_id: <string>import.meta.env.VITE_GOOGLE_CLIENT_ID,
+                callback: x => {
+                    const user = decodeJWT(x.credential)
+                    console.log(user)
+                    this.user = {
+                        _id: user.sub,
+                        email: user.email,
+                        firstName: user.given_name,
+                        lastName: user.family_name,
+                        pic: user.picture,
+                        handle: user.email,
+                        password: ''
+                    }
+                }
+              });
+            google.accounts.id.prompt(() => {});
+        },
         async Login(email: string, password: string) {
             const messages = useMessage();
         

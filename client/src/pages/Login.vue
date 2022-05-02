@@ -43,6 +43,10 @@ import { useSession } from '../models/session';
                                 <button class="button is-success">
                                 Login
                                 </button>
+
+                                <button class="button is-success ml-4" @click.prevent="session.GoogleLogin()">
+                                Google Login
+                                </button>
                             </p>
                         </div>
                     </form>
