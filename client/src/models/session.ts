@@ -6,7 +6,7 @@ import { defineStore } from "pinia"
 
 export const useSession = defineStore('session', {
     state: () => ({
-        user: null as users.User | null,
+        user: undefined as users.User | undefined,
         destinationURL: null as string | null
     }),
     actions: {
@@ -34,7 +34,7 @@ export const useSession = defineStore('session', {
             }
         },
         Logout(){
-            this.user = null
+            this.user = undefined
             router.push('/login')
         },
         async api(url: string, data?: any, method?: 'POST' | 'GET' | 'PUT' | 'DELETE', headers: any = {}){
