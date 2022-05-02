@@ -2,10 +2,10 @@ http://localhost:3001
 
 ###
 GET http://localhost:3001/api/users/
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+Authorization: bearer {{ login.response.body.data.token }}
 
 ###
-GET http://localhost:3001/api/users/62547245d32925b581ec0e1f
+GET http://localhost:3001/api/users/625ddc1de609adf77a1eaf61
 
 ###
 GET http://localhost:3001/api/users/handle/vp
@@ -26,6 +26,19 @@ Content-Type: application/json
     "email": "president@newpaltz.edu",
     "pic": "https://randomuser.me/api/portraits/men/2.jpg"
 }
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "firstName": "Kamala",
+    "lastName": "Harris",
+    "handle": "vp",
+    "password": "password",
+    "email": "kamila@whitehouse.org",
+    "pic": "https://randomuser.me/api/portraits/women/3.jpg"
+}
+
 
 ###
 PATCH http://localhost:3001/api/users/2
@@ -38,12 +51,13 @@ Content-Type: application/json
 }
 
 ###
+# @name login
 POST http://localhost:3001/api/users/login
 Content-Type: application/json
 
 {
-    "email": "save@ukraine.com",
-    "password": "Ukraine"
+    "email": "president@newpaltz.edu",
+    "password": "hugo"
 }
 
 ###
@@ -77,10 +91,10 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWb
     {
         "src": "https://w2.chabad.org/media/images/1187/SvDB11878116.jpg?_i=_n504BC99DD0473598AAE3BCDC5D75568D",
         "caption": "Of Mugs and Family Ties",
-        "owner": 1,
+        "owner": 4,
         "likes": [],
         "comments": [],
-        "isPublic": true,
+        "isPublic": true
      }
 
 
@@ -96,3 +110,12 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWb
 ###
 POST http://localhost:3001/api/posts/seed
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJWbGFkaW1pciIsImxhc3ROYW1lIjoiUHV0aW4gSUlJIiwiaGFuZGxlIjoicnVzc2lhbl9kaWN0YXRvciIsImVtYWlsIjoic2F2ZUB1a3JhaW5lLmNvbSIsInBpYyI6Imh0dHBzOi8vcmFuZG9tdXNlci5tZS9hcGkvcG9ydHJhaXRzL21lbi8yLmpwZyIsImlkIjoyLCJpYXQiOjE2NDkwOTg1Njd9.vuvO84tiCQhI4jUCLCsxm3HZouqt_PeWGqU3wba1n0A
+
+###
+https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid={{$dotenv OPENWEATHER_KEY}}
+
+###
+https://api.coinbase.com/v2/exchange-rates
+
+###
+https://maps.googleapis.com/maps/api/place/textsearch/json?query=NewYork&key={{$dotenv GOOGLE_API_KEY_1}}
