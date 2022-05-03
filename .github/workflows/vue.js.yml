@@ -23,27 +23,33 @@ jobs:
         node-version: 16.x
 
     - name: Build vite
+      env:
+        VITE_GOOGLE_API_KEY_1: ${{secrets.VITE_GOOGLE_API_KEY_1}}
+        VITE_GOOGLE_CLIENT_ID: ${{secrets.VITE_GOOGLE_CLIENT_ID}}
+        VITE_OPENWEATHER_KEY: ${{secrets.VITE_OPENWEATHER_KEY}}
       run: |
           npm install
           npm run build --if-present
           npm run test --if-present
       working-directory: client
 
-    - name: Copy static files
+    - name: Copy static files & delete sources
       run: |
-          mkdir -p dist/server/public/
-          cp -a client/dist/. dist/server/public/
-          cp -a server/. dist/server/
-          cp package.json dist/
+          ls -a
+          mkdir -p server/public/
+          cp -a client/dist/. server/public/
+          rm -r client .gitignore
           
-    - name: Deploy 🚀
+          
+    - name: Deploy 🚀 Github Pages
       uses: JamesIves/github-pages-deploy-action@v4.2.3
       with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: dist/server/public # The folder the action should deploy.
+          folder: server/public # The folder the action should deploy.
 
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4.2.3
+    - name: Deploy 🚀 to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
-          branch: node-deploy # The branch the action should deploy to.
-          folder: dist # The folder the action should deploy.
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} # Will create app if one does not exist yet with this name
+          heroku_email: ${{secrets.HEROKU_APP_NAME}} # The email that you use to log in to Heroku
