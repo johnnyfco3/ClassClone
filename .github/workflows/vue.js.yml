@@ -12,6 +12,10 @@ on:
 jobs:
   build:
 
+    strategy:
+      matrix:
+        host: ['github-pages', 'heroku']
+
     runs-on: ubuntu-latest
 
     steps:
@@ -24,12 +28,13 @@ jobs:
 
     - name: Build vite
       env:
+        VITE_API_URL: "https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/api/"
         VITE_GOOGLE_API_KEY_1: ${{secrets.VITE_GOOGLE_API_KEY_1}}
         VITE_GOOGLE_CLIENT_ID: ${{secrets.VITE_GOOGLE_CLIENT_ID}}
         VITE_OPENWEATHER_KEY: ${{secrets.VITE_OPENWEATHER_KEY}}
       run: |
           npm install
-          npm run build --if-present
+          npx vue-tsc --noEmit && npx vite build --base=${{ matrix.host == 'github-pages' && '/2022-spring' || '' }}/
           npm run test --if-present
       working-directory: client
 
@@ -42,12 +47,14 @@ jobs:
           
           
     - name: Deploy 🚀 Github Pages
+      if:   matrix.host == 'github-pages'
       uses: JamesIves/github-pages-deploy-action@v4.2.3
       with:
           branch: gh-pages # The branch the action should deploy to.
           folder: server/public # The folder the action should deploy.
 
     - name: Deploy 🚀 to Heroku
+      if:   matrix.host == 'heroku'
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
